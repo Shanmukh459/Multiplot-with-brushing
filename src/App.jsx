@@ -10,6 +10,8 @@ function App() {
   if (!worldAtlas) {
     return <h1>Loading...</h1>
   }
+
+  console.log(worldAtlas)
   return (
     <svg height={height} width={width} >
       <Marks worldAtlas={worldAtlas} />
