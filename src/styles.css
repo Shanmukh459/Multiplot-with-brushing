@@ -14,3 +14,11 @@
   fill: #137b80;
   opacity: 0.3;
 }
+
+.ticks line {
+  stroke: #c0c0bb;
+}
+
+rect {
+  fill: #137b80;
+}
