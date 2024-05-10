@@ -1,7 +1,9 @@
-import { bin, scaleLinear, scaleTime, timeMonths, extent, max, sum, timeFormat } from "d3"
+import { bin, scaleLinear, scaleTime, timeMonths, extent, max, sum, timeFormat, brushX, select } from "d3"
 import { Marks } from "./Marks"
 import { AxisBottom } from "./AxisBottom"
 import { AxisLeft } from "./AxisLeft"
+import { useEffect } from "react"
+import { useRef } from "react"
 
 const margin = {
   top: 10,
@@ -15,11 +17,10 @@ const yAxisLabelOffset = 25
 
 const xAxisTickFormat = timeFormat('%m/%d/%Y')
 
-export const DateHistogram = ({data, width, height}) => {
+export const DateHistogram = ({data, width, height, setBrushExtent, xValue}) => {
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
-  const xValue = d => d['Reported Date']
   const xAxisLabel = 'Time'
 
   const yValue = d => d['Total Dead and Missing']
@@ -46,6 +47,15 @@ export const DateHistogram = ({data, width, height}) => {
   .domain([0, max(binnedData, d => d.totalDeadAndMissing)])
   .range([innerHeight, 0])
   .nice()
+  
+  const brushRef = useRef()
+  useEffect(() => {
+    const brush = brushX().extent([[0, 0], [innerWidth, innerHeight]])
+    brush(select(brushRef.current))
+    brush.on("brush", (event) => {
+      setBrushExtent(event.selection.map(xScale.invert))
+    })
+  }, [innerHeight, innerWidth])
 
   return (
     <svg width={width} height={height}>
@@ -56,6 +66,7 @@ export const DateHistogram = ({data, width, height}) => {
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={3} />
         <text className="axis-label" transform={`translate(${-yAxisLabelOffset}, ${innerHeight/2}) rotate(-90)`} textAnchor="middle">{yAxisLabel}</text>
         <Marks binnedData={binnedData} xScale={xScale} yScale={yScale} innerHeight={innerHeight} />
+        <g ref={brushRef}></g>
       </g>
     </svg>
   )
