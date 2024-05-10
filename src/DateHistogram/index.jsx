@@ -1,4 +1,5 @@
 import { bin, scaleLinear, scaleTime, timeMonths, extent, max, sum } from "d3"
+import { Marks } from "./Marks"
 
 const margin = {
   top: 20,
@@ -39,13 +40,10 @@ export const DateHistogram = ({data, width, height}) => {
   console.log(binnedData)
 
   return (
-    (binnedData.map(d => (
-      <rect 
-        x={xScale(d.x0)}
-        y={yScale(d.totalDeadAndMissing)}
-        width={xScale(d.x1) - xScale(d.x0)}
-        height={innerHeight - yScale(d.totalDeadAndMissing)}
-      />
-    )))
+    <svg>
+      <g transform={`translate(${margin.left}, ${margin.top})`}>
+        <Marks binnedData={binnedData} xScale={xScale} yScale={yScale} innerHeight={innerHeight} />
+      </g>
+    </svg>
   )
 }

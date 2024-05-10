@@ -16,7 +16,7 @@ function App() {
 
   return (
     <svg height={height} width={width} >
-        <BubbleMap data={data} worldAtlas={worldAtlas} />
+        {/* <BubbleMap data={data} worldAtlas={worldAtlas} /> */}
         <DateHistogram data={data} width={width} height={height}/>
     </svg>
   )
