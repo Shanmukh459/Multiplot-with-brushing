@@ -6,9 +6,12 @@ import { AxisLeft } from "./AxisLeft"
 const margin = {
   top: 20,
   right: 40,
-  bottom: 20,
-  left: 40
+  bottom: 80,
+  left: 80
 }
+
+const xAxisLabelOffset = 50
+const yAxisLabelOffset = 45
 
 const xAxisTickFormat = timeFormat('%m/%d/%Y')
 export const DateHistogram = ({data, width, height}) => {
@@ -17,7 +20,10 @@ export const DateHistogram = ({data, width, height}) => {
   const innerHeight = height - margin.top - margin.bottom
 
   const xValue = d => d['Reported Date']
+  const xAxisLabel = 'Time'
+
   const yValue = d => d['Total Dead and Missing']
+  const yAxisLabel = 'Total Dead and Missing'
 
   const xScale = scaleTime()
     .domain(extent(data, xValue))
@@ -45,7 +51,9 @@ export const DateHistogram = ({data, width, height}) => {
     <svg>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} tickOffset={5} />
+        <text className="axis-label" y={innerHeight+xAxisLabelOffset} textAnchor="middle" x={innerWidth/2}>{xAxisLabel}</text>
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={3} />
+        <text className="axis-label" transform={`translate(${-yAxisLabelOffset}, ${innerHeight/2}) rotate(-90)`} textAnchor="middle">{yAxisLabel}</text>
         <Marks binnedData={binnedData} xScale={xScale} yScale={yScale} innerHeight={innerHeight} />
       </g>
     </svg>
