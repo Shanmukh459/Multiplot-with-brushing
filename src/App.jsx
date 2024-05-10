@@ -1,7 +1,6 @@
 import { useWorldAtlas } from "./useWorldAtlas"
-import { Marks } from "./Marks"
 import { useData } from "./useData"
-import { scaleSqrt, max } from "d3"
+import { BubbleMap } from "./BubbleMap"
 
 const width = 960
 const height = 500
@@ -14,17 +13,9 @@ function App() {
     return <h1>Loading...</h1>
   }
 
-  const sizeValue= d => d['Total Dead and Missing']
-  const maxRadius = 10
-
-  const sizeScale = scaleSqrt()
-    .domain([0, max(data, sizeValue)])
-    .range([0, maxRadius])
-
-  console.log(data)
   return (
     <svg height={height} width={width} >
-      <Marks data={data} worldAtlas={worldAtlas} sizeScale={sizeScale} sizeValue={sizeValue} />
+        <BubbleMap data={data} worldAtlas={worldAtlas} />
     </svg>
   )
 }
