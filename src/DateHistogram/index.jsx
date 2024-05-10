@@ -1,6 +1,7 @@
 import { bin, scaleLinear, scaleTime, timeMonths, extent, max, sum, timeFormat } from "d3"
 import { Marks } from "./Marks"
 import { AxisBottom } from "./AxisBottom"
+import { AxisLeft } from "./AxisLeft"
 
 const margin = {
   top: 20,
@@ -43,19 +44,8 @@ export const DateHistogram = ({data, width, height}) => {
   return (
     <svg>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} />
-        {yScale.ticks().map(tickValue => (
-          <g className="ticks" transform={`translate(0, ${yScale(tickValue)})`}>
-            <line x2={innerWidth} />
-            <text
-              textAnchor="end"
-              dy="0.32em"
-              x={-3}
-            >
-              {tickValue}
-            </text>
-          </g>
-        ))}
+        <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} tickOffset={5} />
+        <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={3} />
         <Marks binnedData={binnedData} xScale={xScale} yScale={yScale} innerHeight={innerHeight} />
       </g>
     </svg>
