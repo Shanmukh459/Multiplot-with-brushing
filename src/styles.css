@@ -1,4 +1,4 @@
-.marks .countries {
+.marks .land {
   fill: #e2e1e1 
 }
 
@@ -8,4 +8,9 @@
 
 .marks .sphere {
   fill: #efeeee;
+}
+
+.marks circle {
+  fill: #137b80;
+  opacity: 0.3;
 }
