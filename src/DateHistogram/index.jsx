@@ -4,18 +4,18 @@ import { AxisBottom } from "./AxisBottom"
 import { AxisLeft } from "./AxisLeft"
 
 const margin = {
-  top: 20,
-  right: 40,
-  bottom: 80,
-  left: 80
+  top: 10,
+  right: 25,
+  bottom: 15,
+  left: 40
 }
 
 const xAxisLabelOffset = 50
-const yAxisLabelOffset = 45
+const yAxisLabelOffset = 25
 
 const xAxisTickFormat = timeFormat('%m/%d/%Y')
-export const DateHistogram = ({data, width, height}) => {
 
+export const DateHistogram = ({data, width, height}) => {
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
@@ -48,7 +48,8 @@ export const DateHistogram = ({data, width, height}) => {
   .nice()
 
   return (
-    <svg>
+    <svg width={width} height={height}>
+      <rect  width={width} height={height} fill='white'/>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} tickOffset={5} />
         <text className="axis-label" y={innerHeight+xAxisLabelOffset} textAnchor="middle" x={innerWidth/2}>{xAxisLabel}</text>
