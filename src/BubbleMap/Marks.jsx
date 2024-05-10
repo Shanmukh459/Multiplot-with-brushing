@@ -1,12 +1,14 @@
-import { geoNaturalEarth1, geoPath } from "d3"
+import { geoGraticule, geoNaturalEarth1, geoPath } from "d3"
 
 const projection = geoNaturalEarth1()
 const path = geoPath(projection)
+const graticules = geoGraticule()
 
 export const Marks = ({ worldAtlas: {land, interiors}, data, sizeScale, sizeValue }) => {
   return (
     <g className="marks">
       <path className="sphere" d={path({type: 'Sphere'})} />
+      <path className="graticules" d={path(graticules())} />
       {land.features.map((feature, i) => (
           <path className="land" key={i} d={path(feature)} />
       ))}
