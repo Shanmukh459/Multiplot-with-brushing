@@ -1,8 +1,8 @@
 # Multiple graphs with Brushing
 
 - This project contains mainly two plot namely
-  - Bubble Map: This is a plot of Missing migrants on a world map
-  - Histogram : This is plot of Missing migrants aggregated by months present in the timeline of the dataset
+  - [Bubble Map](https://github.com/Shanmukh459/Cities-on-worldmap): This is a plot of Missing migrants on a world map
+  - [Histogram](https://github.com/Shanmukh459/Missing-migrants-aggregation) : This is plot of Missing migrants aggregated by months present in the timeline of the dataset
 - The dataset used for this project is taken from [Missing Migrants Project](https://missingmigrants.iom.int/downloads)
 - The feature that makes this project standout is the implemention of the "brushing" on histogram based on which the bubbles are populated on the worldmap
 - The bubble map takes the domain of the brushed area and filters the migrants data that falls in that domain and plot on the world map.
