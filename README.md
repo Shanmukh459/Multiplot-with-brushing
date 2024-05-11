@@ -18,6 +18,7 @@
 
 ## Snippet
 
+https://github.com/Shanmukh459/Multiplot-with-brushing/assets/52078988/872bf51d-45d6-41c0-96c1-f64bb5cdae6c
 
 
 Happy Coding!
